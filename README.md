@@ -1,7 +1,7 @@
 # Quem é esse Pokémon?
 
 Este projeto é uma avaliação técnica desenvolvida com **Ionic + Angular** utilizando componentes standalone, consumindo a [PokeAPI](https://pokeapi.co/) para exibir, detalhar e favoritar Pokémons. O repositório segue boas práticas de versionamento, arquitetura e responsividade, e pode ser acompanhado em:  
-**[github.com/seu-usuario/quem-e-esse-pokemon](https://github.com/seu-usuario/quem-e-esse-pokemon)**
+**[github.com/seu-usuario/quem-e-esse-pokemon](https://github.com/Ld36/quem_e_esse_pokemon.git)**
 
 ## Abordagem e padrões
 
