@@ -9,7 +9,7 @@
       "sourceRoot": "src",
       "prefix": "app",
       "architect": {
-        "build": {
+   "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/quem-e-esse-pokemon",
@@ -44,19 +44,33 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
             }
-          }
+          },
+          "defaultConfiguration": "production"
         },
-        "serve": {
+         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "buildTarget": "quem-e-esse-pokemon:build"
+            "buildTarget": "quem-e-esse-pokemon:build"       
           },
           "configurations": {
             "production": {
               "buildTarget": "quem-e-esse-pokemon:build:production"
+            },
+            "development": {
+              "buildTarget": "quem-e-esse-pokemon:build:development",
+              "watch": true
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
