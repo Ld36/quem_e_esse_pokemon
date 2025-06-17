@@ -3,6 +3,13 @@
     <ion-title>Quem é esse Pokémon?</ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content>
-  <!-- Lista de Pokémons será exibida aqui -->
+
+<ion-content class="ion-padding">
+  <ion-item>
+    <ion-label position="floating">Nome ou ID do Pokémon</ion-label>
+    <ion-input [(ngModel)]="pokemonNameOrId" placeholder="Ex: pikachu, 25"></ion-input>
+  </ion-item>
+  <ion-button expand="block" (click)="buscarPokemon()">Buscar</ion-button>
+
+  <!-- <app-pokemon-info [nameOrId]="pokemonSelecionado"></app-pokemon-info> -->
 </ion-content>
