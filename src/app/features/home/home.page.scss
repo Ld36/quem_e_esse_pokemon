@@ -1,1 +1,130 @@
-/* ...existing code... */
+// // Cores Temáticas Pokémon
+// $pokemon-red: #dc0a2d;
+// $pokemon-blue: #0075be;
+// $pokemon-yellow: #ffcb05;
+// $pokemon-gray: #303030;
+// $pokemon-light-gray: #f2f2f2;
+// $pokemon-green: #4CAF50; // Para o botão de buscar
+
+// // --- Cabeçalho ---
+// .pokemon-header {
+//   ion-toolbar {
+//     --background: $pokemon-red; // Vermelho vibrante da Pokebola
+//     --color: white; // Texto branco
+//     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); // Sombra para destacar o header
+//     z-index: 10; // Garante que o header esteja acima de tudo
+
+//     .pokemon-title {
+//       font-family: 'Press Start 2P', cursive; // Assumindo que você importou essa fonte ou similar
+//       font-size: 1.5em;
+//       text-align: center;
+//       text-shadow: 2px 2px 0px $pokemon-gray; // Sombra para o texto do título
+//       letter-spacing: 2px; // Espaçamento entre as letras
+//     }
+//   }
+// }
+
+// // --- Conteúdo Principal e Fundo (Corrigido para manter o tamanho original e repetição) ---
+// // ion-content.pokemon-background {
+// //   --background: url('/assets/images/pokethemes.jpg') repeat center center !important;
+// //   --background-size: 15vw !important;
+// // }
+
+// // @media (max-width: 600px) {
+// //   ion-content.pokemon-background {
+// //     --background-size: 25vw !important;
+// //   }
+// // }
+
+// // @media (min-width: 1200px) {
+// //   ion-content.pokemon-background {
+// //     --background-size: 8vw !important;
+// //   }
+// // }
+
+// // --- Card de Busca (Mantenha o z-index alto para ficar acima do fundo e da sobreposição) ---
+// .search-card {
+//   position: relative; // Importante para que o z-index funcione corretamente em relação ao pseudo-elemento
+//   z-index: 2; // Garante que o card de busca esteja acima da imagem de fundo E da sobreposição
+//   background: linear-gradient(145deg, #ffffff, #e6e6e6); // Gradiente suave para o card
+//   border-radius: 15px; // Cantos arredondados
+//   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); // Sombra mais proeminente
+//   padding: 25px;
+//   width: 90%;
+//   max-width: 450px; // Largura máxima para desktops
+//   text-align: center; // Centraliza o conteúdo dentro do card
+//   border: 3px solid $pokemon-yellow; // Borda amarela vibrante
+//   animation: bounceIn 0.8s ease-out; // Animação de entrada
+// } 
+
+// @keyframes bounceIn {
+//   0% {
+//     transform: scale(0.8);
+//     opacity: 0;
+//   }
+//   60% {
+//     transform: scale(1.05);
+//     opacity: 1;
+//   }
+//   100% {
+//     transform: scale(1);
+//   }
+// }
+
+// .search-input-item {
+//   margin-bottom: 20px;
+//   --background: $pokemon-light-gray; // Fundo do item input
+//   border-radius: 10px;
+//   border: 1px solid $pokemon-blue; // Borda azul
+//   box-shadow: inset 0 2px 5px rgba(0,0,0,0.1); // Sombra interna
+// }
+
+// .search-label {
+//   font-weight: bold;
+//   color: $pokemon-gray;
+// }
+
+// .search-input {
+//   --padding-start: 15px;
+//   color: $pokemon-gray;
+// }
+
+// .search-button {
+//   --background: $pokemon-green; // Verde vibrante
+//   --background-activated: darken($pokemon-green, 10%); // Escurece ao clicar
+//   --border-radius: 30px; // Botão pilular
+//   font-weight: bold;
+//   font-size: 1.1em;
+//   text-transform: uppercase;
+//   letter-spacing: 1px;
+//   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2); // Sombra para o botão
+//   transition: transform 0.2s ease-in-out; // Transição suave para o efeito hover
+
+//   &:hover { // Efeito ao passar o mouse
+//     transform: translateY(-3px);
+//   }
+
+//   ion-icon {
+//     font-size: 1.2em;
+//     margin-right: 5px; // Espaço entre o ícone e o texto
+//   }
+// }
+
+// // --- Outros elementos (ex: featured-pokemon) ---
+// .featured-pokemon {
+//   margin-top: 30px;
+//   img {
+//     width: 150px;
+//     height: auto;
+//     animation: rotateAndBounce 2s infinite ease-in-out; // Animação para a imagem
+//   }
+// }
+
+// @keyframes rotateAndBounce {
+//   0%, 100% {
+//     transform: translateY(0) rotate(0deg);
+//   }
+//   50% {
+//     transform: translateY(-10px) rotate(5deg);
+//   }
+// }

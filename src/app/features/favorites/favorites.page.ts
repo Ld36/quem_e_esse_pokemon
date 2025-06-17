@@ -7,7 +7,11 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-favorites',
   standalone: true,
-  imports: [IonicModule, RouterModule, CommonModule, PokemonInfoComponent],
+  imports: [IonicModule,
+            RouterModule,
+            CommonModule,
+            // PokemonInfoComponent
+            ],
   templateUrl: './favorites.page.html',
   styleUrls: ['./favorites.page.scss']
 })

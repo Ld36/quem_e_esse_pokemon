@@ -1,15 +1,24 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Quem é esse Pokémon?</ion-title>
+<ion-content>
+
+  TESTE
+
+</ion-content>
+
+<div></div>
+<ion-header class="pokemon-header">
+  <ion-toolbar class="pokemon-toolbar">
+    <ion-title class="pokemon-title">Quem é esse Pokémon?</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <ion-item>
-    <ion-label position="floating">Nome ou ID do Pokémon</ion-label>
-    <ion-input [(ngModel)]="pokemonNameOrId" placeholder="Ex: pikachu, 25"></ion-input>
-  </ion-item>
-  <ion-button expand="block" (click)="buscarPokemon()">Buscar</ion-button>
+  <div class="search-card">
+    <ion-item class="search-input-item">
+      <ion-label position="floating" class="search-label">Nome ou ID do Pokémon</ion-label>
+      <ion-input [(ngModel)]="pokemonNameOrId" placeholder="Ex: pikachu, 25" class="search-input"></ion-input>
+    </ion-item>
+    <ion-button expand="block" (click)="buscarPokemon()" class="search-button">
+      <ion-icon name="search" slot="start"></ion-icon>
+      Buscar
+    </ion-button>
+  </div>
 
-  <!-- <app-pokemon-info [nameOrId]="pokemonSelecionado"></app-pokemon-info> -->
-</ion-content>
