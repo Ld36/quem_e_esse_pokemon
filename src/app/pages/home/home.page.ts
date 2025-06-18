@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common'; // <-- Certifique-se que CommonModule está aqui!
+import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { PokemonService } from 'src/app/services/pokemon.service';
 import { HttpClientModule } from '@angular/common/http';
@@ -13,7 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
   standalone: true,
   imports: [
     IonicModule,
-    CommonModule, // <--- Este é crucial para o *ngIf e outras diretivas
+    CommonModule,
     FormsModule,
     HttpClientModule,
   ]
