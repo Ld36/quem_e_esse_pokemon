@@ -1,0 +1,7 @@
+{
+  "name": "quem_e_esse_pokemon_novo",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
