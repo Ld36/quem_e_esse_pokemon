@@ -5,6 +5,8 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { PokemonService } from 'src/app/services/pokemon.service';
 import { HttpClientModule } from '@angular/common/http';
+// Add this import for lastValueFrom
+import { lastValueFrom } from 'rxjs'; // <--- NEW IMPORT
 
 @Component({
   selector: 'app-home',
@@ -15,7 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
     IonicModule,
     CommonModule,
     FormsModule,
-    HttpClientModule,
+    HttpClientModule, // While imported here, HttpClient is provided globally in main.ts
   ]
 })
 export class HomePage implements OnInit {
@@ -30,15 +32,12 @@ export class HomePage implements OnInit {
     this.fetchAllPokemons();
   }
 
-  // --- NOVO MÉTODO PARA TRATAR OS TIPOS ---
   getPokemonTypesString(pokemon: any): string {
     if (pokemon && pokemon.types && Array.isArray(pokemon.types)) {
-      // Mapeia os tipos para os nomes e junta-os com vírgula e espaço
       return pokemon.types.map((t: any) => t.type.name).join(', ');
     }
-    return ''; // Retorna string vazia se não houver tipos
+    return '';
   }
-  // ----------------------------------------
 
   searchPokemon() {
     const term = this.searchTerm.trim().toLowerCase();
@@ -63,16 +62,21 @@ export class HomePage implements OnInit {
     this.router.navigate(['/detail', term]);
   }
 
-  fetchAllPokemons() {
+  async fetchAllPokemons() { // Mark as async
     this.loading = true;
-    this.pokemonService.getPokemons(0, 50).subscribe(async res => {
+    try {
+      const res = await lastValueFrom(this.pokemonService.getPokemons(0, 50)); // Use lastValueFrom
       const results = res.results;
-      // Buscar detalhes completos de cada Pokémon
+
       const detailPromises = results.map((p: any) =>
-        this.pokemonService.getPokemonDetail(p.name).toPromise()
+        lastValueFrom(this.pokemonService.getPokemonDetail(p.name)) // Use lastValueFrom here too
       );
       this.pokemons = await Promise.all(detailPromises);
+    } catch (error) {
+      console.error('Failed to fetch pokemons:', error);
+      // Optionally handle error display to user
+    } finally {
       this.loading = false;
-    });
+    }
   }
 }
