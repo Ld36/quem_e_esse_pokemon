@@ -8,7 +8,7 @@ https://github.com/Ld36/quem_e_esse_pokemon.git
 
 ## 🖼️ Demonstração
 
-![Tela inicial do app com tema Pokémon](./src/assets/images/pokethemes.jpg)
+![Tela inicial do app com tema Pokémon](./src/assets/images/telahome.png
 
 ---
 
