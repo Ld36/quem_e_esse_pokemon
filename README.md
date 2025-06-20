@@ -1,7 +1,7 @@
 # Quem é esse Pokémon?
 
 Este é um projeto Angular + Ionic que consome a PokéAPI e permite buscar informações de qualquer Pokémon pelo nome ou ID. A interface é responsiva, temática e amigável para fãs de Pokémon!
-Wste projeto é uma avaliação técnica desenvolvida utilizando componentes standalone, consumindo a PokeAPI para exibir, detalhar e favoritar Pokémons. O repositório segue boas práticas de versionamento, arquitetura e responsividade, e pode ser acompanhado em:
+Este projeto é uma avaliação técnica desenvolvida utilizando componentes standalone, consumindo a PokeAPI para exibir, detalhar e favoritar Pokémons. O repositório segue boas práticas de versionamento, arquitetura e responsividade, e pode ser acompanhado em:
 https://github.com/Ld36/quem_e_esse_pokemon.git
 
 ---
