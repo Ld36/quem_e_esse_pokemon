@@ -5,6 +5,10 @@ import { CommonModule } from '@angular/common';
 import { PokemonService } from 'src/app/services/pokemon.service';
 import { HttpClientModule } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
+import { Router } from '@angular/router';
+import { addIcons } from 'ionicons';
+import { heart, heartOutline, search } from 'ionicons/icons';
+
 
 @Component({
   selector: 'app-home',
@@ -24,10 +28,22 @@ export class HomePage implements OnInit, OnDestroy {
   pokemons: any[] = [];
   allPokemons: any[] = [];
   loading = false;
+  favorites: string[] = [];
 
-  constructor(private pokemonService: PokemonService) { }
+  constructor(
+    private pokemonService: PokemonService,
+    private router: Router
+  ) {
+    addIcons({
+      search,
+      heart,
+      'heart-outline': heartOutline
+    });
+    }
 
   ngOnInit() {
+    const favs = localStorage.getItem('favorites');
+    if (favs) this.favorites = JSON.parse(favs);
     this.fetchAllPokemons();
   }
 
@@ -52,7 +68,6 @@ export class HomePage implements OnInit, OnDestroy {
       const filtered = this.allPokemons.filter((p: any) =>
         p.name.toLowerCase().includes(term.toLowerCase())
       );
-      // Limite para não sobrecarregar (ex: 20 resultados)
       const first20 = filtered.slice(0, 20);
       const detailPromises = first20.map((p: any) =>
         lastValueFrom(this.pokemonService.getPokemonDetail(p.name))
@@ -73,5 +88,22 @@ export class HomePage implements OnInit, OnDestroy {
 
   searchPokemon() {
     this.onSearchTermChange(this.searchTerm ?? '');
+  }
+
+  goToDetail(name: string) {
+    this.router.navigate(['/detail', name]);
+  }
+
+  toggleFavorite(name: string) {
+    if (this.favorites.includes(name)) {
+      this.favorites = this.favorites.filter(fav => fav !== name);
+    } else {
+      this.favorites.push(name);
+    }
+    localStorage.setItem('favorites', JSON.stringify(this.favorites));
+  }
+
+  isFavorite(name: string): boolean {
+    return this.favorites.includes(name);
   }
 }

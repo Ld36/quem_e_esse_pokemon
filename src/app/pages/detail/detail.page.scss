@@ -1,0 +1,74 @@
+ion-content.pokemon-background {
+  --background: url('/assets/images/pokeball-pattern.png') repeat center center !important;
+  --background-size: 120px !important;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+}
+
+.detail-card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  padding: 32px 24px 24px 24px;
+  margin: 32px auto;
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+}
+
+.detail-image {
+  width: 180px;
+  height: 180px;
+  object-fit: contain;
+  margin-bottom: 16px;
+  background: #f2f2f2;
+  border-radius: 50%;
+  border: 2px solid #0075be;
+}
+
+.poke-id {
+  color: #aaa;
+  font-size: 0.9em;
+}
+
+.poke-types {
+  margin: 12px 0;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.poke-stats {
+  margin: 18px 0 10px 0;
+  text-align: left;
+}
+
+.poke-abilities {
+  margin: 18px 0 10px 0;
+  text-align: left;
+}
+
+.hidden-ability {
+  color: #dc0a2d;
+  font-size: 0.9em;
+  margin-left: 6px;
+}
+
+.poke-base {
+  margin: 18px 0 10px 0;
+  text-align: left;
+}
+
+.poke-cries {
+  margin: 18px 0 10px 0;
+}
+
+.poke-games {
+  margin: 18px 0 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+}

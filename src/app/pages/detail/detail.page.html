@@ -1,13 +1,73 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Detalhes do Pokémon</ion-title>
+<ion-header class="pokemon-header">
+  <ion-toolbar class="pokemon-toolbar">
+    <ion-buttons slot="start">
+      <ion-button routerLink="/"><ion-icon name="home-outline"></ion-icon> Inicio</ion-button>
+    </ion-buttons>
+    <ion-title class="pokemon-title">
+      Detalhes do {{ pokemon?.name | titlecase }}
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="addToFavorites()">
+        <ion-icon name="star-outline"></ion-icon> Favoritos
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">detail</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="pokemon-background" *ngIf="!loading && pokemon">
+  <div class="detail-card">
+    <img
+      class="detail-image"
+      [src]="pokemon.sprites?.other?.['official-artwork']?.front_default || pokemon.sprites?.front_default"
+      [alt]="pokemon.name"
+    />
+
+    <h2>{{ pokemon.name | titlecase }} <span class="poke-id">#{{ pokemon.id }}</span></h2>
+    <div class="poke-types">
+      <ion-chip *ngFor="let t of pokemon.types" color="primary">
+        {{ t.type.name | titlecase }}
+      </ion-chip>
+    </div>
+
+    <div class="poke-stats">
+      <div *ngFor="let stat of pokemon.stats">
+        <strong>{{ stat.stat.name | titlecase }}:</strong> {{ stat.base_stat }}
+      </div>
+    </div>
+
+    <div class="poke-abilities">
+      <h3>Habilidades</h3>
+      <ul>
+        <li *ngFor="let ab of pokemon.abilities">
+          {{ ab.ability.name | titlecase }}
+          <span *ngIf="ab.is_hidden" class="hidden-ability">(Oculta)</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="poke-base">
+      <strong>Experiência Base:</strong> {{ pokemon.base_experience }}<br>
+      <strong>Peso:</strong> {{ pokemon.weight }}<br>
+      <strong>Altura:</strong> {{ pokemon.height }}
+    </div>
+
+    <div class="poke-cries" *ngIf="pokemon.cries?.latest">
+      <h3>Choro</h3>
+      <audio controls>
+        <source [src]="pokemon.cries.latest" type="audio/ogg" />
+        Seu navegador não suporta áudio.
+      </audio>
+    </div>
+
+    <div class="poke-games">
+      <h3>Jogos</h3>
+      <ion-chip *ngFor="let g of pokemon.game_indices">
+        {{ g.version.name | titlecase }}
+      </ion-chip>
+    </div>
+  </div>
+</ion-content>
+
+<ion-content *ngIf="loading">
+  <ion-spinner style="display:block; margin: 40px auto;"></ion-spinner>
 </ion-content>
