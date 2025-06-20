@@ -1,213 +1,108 @@
-//  // ... (seus estilos existentes, como pokemon-header, search-card, etc.) ...
-
-// .pokemon-card {
-//   --background: #fff; // Fundo branco para os cards da lista
-//   border-radius: 10px;
-//   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-//   margin: 10px; // Espaçamento entre os cards
-//   display: flex; // Para centralizar o conteúdo do card
-//   flex-direction: column;
-//   justify-content: center;
-//   align-items: center;
-//   padding: 10px;
-//   text-align: center;
-//   cursor: pointer; // Indica que o card é clicável
-//   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; // Transição suave para hover
-
-//   &:hover {
-//     transform: translateY(-5px); // Pequeno efeito de elevação no hover
-//     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); // Sombra mais forte no hover
-//   }
-// }
-
-// .pokemon-image {
-//   width: 200px; // Tamanho fixo para a imagem do Pokémon
-//   height: 200px;
-//   object-fit: contain; // Garante que a imagem não seja cortada
-//   margin-bottom: 5px;
-// }
-
-// // ... (seus estilos existentes) ...
-
-// .pokemon-name {
-//   font-size: 1.1em;
-//   font-weight: bold;
-//   color: black; // Mudei a cor do nome para preto
-// }
-
-// Cores Temáticas Pokémon
 $pokemon-red: #dc0a2d;
 $pokemon-blue: #0075be;
 $pokemon-yellow: #ffcb05;
 $pokemon-gray: #303030;
 $pokemon-light-gray: #f2f2f2;
-$pokemon-green: #4CAF50; // Para o botão de buscar
+$pokemon-green: #4CAF50;
 
-// --- Cabeçalho ---
-.pokemon-header {
-  ion-toolbar {
-    --background: $pokemon-red; // Vermelho vibrante da Pokebola
-    --color: white; // Texto branco
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); // Sombra para destacar o header
-    z-index: 10; // Garante que o header esteja acima de tudo
+.pokemon-background {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  --background: url('/assets/images/pokethemes.jpg') repeat center center;
+  --background-size: 120px;
+  padding-bottom: 32px;
+}
 
-    .pokemon-title {
-      font-family: 'Press Start 2P', cursive; // Assumindo que você importou essa fonte ou similar
-      font-size: 1.5em;
-      text-align: center;
-      text-shadow: 2px 2px 0px $pokemon-gray; // Sombra para o texto do título
-      letter-spacing: 2px; // Espaçamento entre as letras
-    }
+@media (max-width: 600px) {
+  .pokemon-background {
+    --background-size: 60px;
   }
 }
 
-// --- Conteúdo Principal e Fundo ---
-// ion-content.pokemon-background { // Seleciona o ion-content com essa classe
-//   --background: url('/assets/images/pokethemes.jpg') repeat center center; // Fundo principal
-//   background-size: 100px; // Tamanho do padrão do fundo
-//   opacity: 1;
-
-//   display: flex;
-//   flex-direction: column;
-//   // justify-content: center; // Removido para que o scroll funcione melhor com a lista
-//   align-items: center;
-//   padding: 20px;
-
-//   &::before {
-//     content: '';
-//     position: absolute;
-//     inset: 0;
-//     background-color: rgba(0, 0, 0, 0.3);
-//     z-index: 1;
-//   }
-// }
-
-// --- Card de Busca ---
 .search-card {
-  position: relative;
-  z-index: 2;
-  background: linear-gradient(145deg, #ffffff, #e6e6e6);
-  border-radius: 15px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-  padding: 25px;
-  width: 90%;
-  max-width: 450px;
-  text-align: center;
-  border: 3px solid $pokemon-yellow;
-  animation: bounceIn 0.8s ease-out;
-  margin-bottom: 20px; // Adicionado espaço abaixo do card de busca
-}
-
-@keyframes bounceIn {
-  0% {
-    transform: scale(0.8);
-    opacity: 0;
-  }
-  60% {
-    transform: scale(1.05);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1);
-  }
+  margin: 32px auto 24px auto;
+  width: 100%;
+  max-width: 480px;
+  background: linear-gradient(145deg, #fff, #f2f2f2);
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  padding: 24px 18px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
 }
 
 .search-input-item {
-  margin-bottom: 20px;
-  --background: $pokemon-light-gray;
-  border-radius: 10px;
-  border: 1px solid $pokemon-blue;
-  box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
-}
-
-.search-label {
-  font-weight: bold;
-  color: $pokemon-gray;
+  background: transparent;
+  border-radius: 12px;
+  margin-bottom: 0;
+  box-shadow: none;
+  align-items: center;
 }
 
 .search-input {
-  --padding-start: 15px;
+  font-size: 1.1em;
   color: $pokemon-gray;
 }
 
 .search-button {
-  --background: $pokemon-green;
-  --background-activated: darken($pokemon-green, 10%);
-  --border-radius: 30px;
+  margin-left: 12px;
   font-weight: bold;
-  font-size: 1.1em;
-  text-transform: uppercase;
   letter-spacing: 1px;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s ease-in-out;
-
-  &:hover {
-    transform: translateY(-3px);
-  }
-
-  ion-icon {
-    font-size: 1.2em;
-    margin-right: 5px;
-  }
 }
 
-// --- Estilo dos Cards de Pokémon (Lista) ---
+.pokemon-list-grid {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.pokemon-list-col {
+  display: flex;
+  justify-content: center;
+}
+
 .pokemon-card {
-  // Ajuste o background para a imagem de pokébola
-  background: url('/assets/images/pokeball-pattern.png') no-repeat center center; // <<< NOVA PROPRIEDADE
-  background-size: contain; // <<< Ajusta a pokébola para caber dentro do card
-  background-color: rgba(255, 255, 255, 0.8); // <<< Fundo branco semi-transparente para o card, para a imagem aparecer por baixo
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  margin: 10px;
+  width: 100%;
+  max-width: 220px;
+  min-height: 220px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.10);
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  padding: 10px;
-  text-align: center;
+  padding: 18px 8px 12px 8px;
+  margin-bottom: 18px;
+  transition: transform 0.18s, box-shadow 0.18s;
   cursor: pointer;
-  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-  border: 2px solid $pokemon-red; // Uma borda para destacar
+  border: 2px solid $pokemon-yellow;
 
   &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    transform: translateY(-6px) scale(1.04);
+    box-shadow: 0 10px 28px rgba(0,0,0,0.18);
+    border-color: $pokemon-red;
   }
 }
 
 .pokemon-image {
-  width: 100px;
-  height: 100px;
+  width: 96px;
+  height: 96px;
   object-fit: contain;
-  margin-bottom: 5px;
-  z-index: 2; // Garante que a imagem do Pokémon fique acima do fundo de pokébola
-  position: relative; // Necessário para z-index funcionar
+  margin-bottom: 10px;
+  background: #f2f2f2;
+  border-radius: 50%;
+  border: 2px solid $pokemon-blue;
 }
 
 .pokemon-name {
-  font-size: 1.1em;
+  font-size: 1.15em;
   font-weight: bold;
-  color: black; // Mantenha o nome em preto
-  z-index: 2; // Garante que o nome do Pokémon fique acima do fundo de pokébola
-  position: relative; // Necessário para z-index funcionar
-}
-
-// --- Outros elementos (ex: featured-pokemon) ---
-.featured-pokemon {
-  margin-top: 30px;
-  img {
-    width: 150px;
-    height: auto;
-    animation: rotateAndBounce 2s infinite ease-in-out;
-  }
-}
-
-@keyframes rotateAndBounce {
-  0%, 100% {
-    transform: translateY(0) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-10px) rotate(5deg);
-  }
+  color: $pokemon-gray;
+  margin-top: 6px;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 0 #fff;
+  text-align: center;
 }

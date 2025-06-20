@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { PokemonService } from 'src/app/services/pokemon.service';
 import { HttpClientModule } from '@angular/common/http';
+import { Subject, Subscription, lastValueFrom } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -18,61 +20,75 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
   ]
 })
-export class HomePage implements OnInit {
+export class HomePage implements OnInit, OnDestroy {
   searchTerm: string = '';
   searchError: string = '';
   pokemons: any[] = [];
   loading = false;
 
+  private searchSubject = new Subject<string>();
+  private searchSub?: Subscription;
+
   constructor(private router: Router, private pokemonService: PokemonService) { }
 
   ngOnInit() {
+    // Busca inicial (opcional: pode trazer todos ou nenhum)
     this.fetchAllPokemons();
-  }
 
-  // --- NOVO MÉTODO PARA TRATAR OS TIPOS ---
-  getPokemonTypesString(pokemon: any): string {
-    if (pokemon && pokemon.types && Array.isArray(pokemon.types)) {
-      // Mapeia os tipos para os nomes e junta-os com vírgula e espaço
-      return pokemon.types.map((t: any) => t.type.name).join(', ');
-    }
-    return ''; // Retorna string vazia se não houver tipos
-  }
-  // ----------------------------------------
-
-  searchPokemon() {
-    const term = this.searchTerm.trim().toLowerCase();
-    if (!term) {
-      this.searchError = 'Por favor, digite um nome ou ID de Pokémon.';
-      return;
-    }
-
-    this.pokemonService.getPokemonDetail(term).subscribe({
-      next: () => {
-        this.searchError = '';
-        this.goToDetail(term);
-      },
-      error: (err) => {
-        this.searchError = 'Pokémon não encontrado! Tente outro nome ou ID.';
-        console.error('Erro ao buscar Pokémon:', err);
+    // Busca dinâmica
+    this.searchSub = this.searchSubject.pipe(
+      debounceTime(300),
+      distinctUntilChanged()
+    ).subscribe(term => {
+      if (!term) {
+        this.fetchAllPokemons();
+      } else {
+        this.dynamicSearch(term);
       }
     });
   }
-
-  goToDetail(term: string) {
-    this.router.navigate(['/detail', term]);
+  searchPokemon() {
+  this.onSearchTermChange(this.searchTerm ?? '');
   }
 
-  fetchAllPokemons() {
+onSearchTermChange(term: string | null | undefined) {
+  this.searchSubject.next((term ?? '').trim().toLowerCase());
+}
+
+  ngOnDestroy() {
+    this.searchSub?.unsubscribe();
+  }
+
+
+  async fetchAllPokemons() {
     this.loading = true;
-    this.pokemonService.getPokemons(0, 50).subscribe(async res => {
+    try {
+      const res = await lastValueFrom(this.pokemonService.getPokemons(0, 50));
       const results = res.results;
-      // Buscar detalhes completos de cada Pokémon
       const detailPromises = results.map((p: any) =>
-        this.pokemonService.getPokemonDetail(p.name).toPromise()
+        lastValueFrom(this.pokemonService.getPokemonDetail(p.name))
       );
       this.pokemons = await Promise.all(detailPromises);
+    } catch (error) {
+      console.error('Failed to fetch pokemons:', error);
+    } finally {
       this.loading = false;
-    });
+    }
+  }
+
+  async dynamicSearch(term: string) {
+    this.loading = true;
+    try {
+      // Tenta buscar por nome ou ID
+      const poke = await lastValueFrom(this.pokemonService.getPokemonDetail(term));
+      this.pokemons = [poke];
+      this.searchError = '';
+    } catch (error) {
+      this.pokemons = [];
+      this.searchError = 'Pokémon não encontrado!';
+    } finally {
+      this.loading = false;
+    }
   }
 }
+
