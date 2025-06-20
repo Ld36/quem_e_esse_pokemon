@@ -10,6 +10,9 @@ https://github.com/Ld36/quem_e_esse_pokemon.git
 
 ![Tela inicial do app com tema Pokémon](./src/assets/images/telahome1.png)
 
+![Tela de detalhes do app com tema Pokémon](./src/assets/images/teladetalhes.png)
+
+
 ---
 
 ## 🚀 Funcionalidades
