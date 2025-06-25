@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonSpinner, IonChip, IonButtons, IonIcon, IonButton } from '@ionic/angular/standalone';
 import { PokemonService } from 'src/app/services/pokemon.service';
-
 import { addIcons } from 'ionicons';
-import { heart, homeOutline, starOutline } from 'ionicons/icons';
+import { heart, heartOutline, homeOutline, starOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-detail',
@@ -18,14 +17,20 @@ import { heart, homeOutline, starOutline } from 'ionicons/icons';
 export class DetailPage implements OnInit {
   pokemon: any = null;
   loading = true;
+  favorites: string[] = [];
 
   constructor(
     private route: ActivatedRoute,
-    private pokemonService: PokemonService
+    private pokemonService: PokemonService,
+    private router: Router
   ) {
-      addIcons({homeOutline,starOutline});}
+    addIcons({homeOutline,starOutline,heart,'heartOutline':heartOutline});
+  }
 
   ngOnInit() {
+    const favs = localStorage.getItem('favorites');
+    if (favs) this.favorites = JSON.parse(favs);
+
     const name = this.route.snapshot.paramMap.get('name');
     if (name) {
       this.pokemonService.getPokemonDetail(name).subscribe({
@@ -39,7 +44,21 @@ export class DetailPage implements OnInit {
       });
     }
   }
-  addToFavorites() {
-  // Em breve: lógica para favoritar o Pokémon
+
+  toggleFavorite(name: string) {
+    if (this.favorites.includes(name)) {
+      this.favorites = this.favorites.filter(fav => fav !== name);
+    } else {
+      this.favorites.push(name);
+    }
+    localStorage.setItem('favorites', JSON.stringify(this.favorites));
+  }
+
+  isFavorite(name: string): boolean {
+    return this.favorites.includes(name);
+  }
+
+  goToFavorites() {
+    this.router.navigate(['/favorites']);
   }
 }
