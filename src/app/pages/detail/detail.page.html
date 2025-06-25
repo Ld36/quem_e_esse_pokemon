@@ -1,13 +1,13 @@
 <ion-header class="pokemon-header">
   <ion-toolbar class="pokemon-toolbar">
     <ion-buttons slot="start">
-      <ion-button routerLink="/"><ion-icon name="home-outline"></ion-icon> Inicio</ion-button>
+      <ion-button routerLink="/"><ion-icon name="home-outline"></ion-icon> Início</ion-button>
     </ion-buttons>
     <ion-title class="pokemon-title">
       Detalhes do {{ pokemon?.name | titlecase }}
     </ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="addToFavorites()">
+      <ion-button (click)="goToFavorites()">
         <ion-icon name="star-outline"></ion-icon> Favoritos
       </ion-button>
     </ion-buttons>
@@ -18,13 +18,31 @@
   <div class="detail-card">
     <img
       class="detail-image"
-      [src]="pokemon.sprites?.other?.['official-artwork']?.front_default || pokemon.sprites?.front_default"
-      [alt]="pokemon.name"
+      [src]="pokemon?.sprites?.other?.['official-artwork']?.front_default || pokemon?.sprites?.front_default"
+      [alt]="pokemon?.name"
     />
 
-    <h2>{{ pokemon.name | titlecase }} <span class="poke-id">#{{ pokemon.id }}</span></h2>
+    <div class="poke-header-row">
+      <h2>
+        {{ pokemon?.name | titlecase }}
+        <span class="poke-id">#{{ pokemon?.id }}</span>
+      </h2>
+      <ion-button
+        fill="clear"
+        size="small"
+        class="favorite-btn"
+        (click)="toggleFavorite(pokemon?.name)"
+      >
+        <ion-icon
+          [name]="isFavorite(pokemon?.name) ? 'heart' : 'heart-outline'"
+          [class.favorited]="isFavorite(pokemon?.name)"
+          style="font-size: 2em;"
+        ></ion-icon>
+      </ion-button>
+    </div>
+
     <div class="poke-types">
-      <ion-chip *ngFor="let t of pokemon.types" color="primary">
+      <ion-chip *ngFor="let t of pokemon?.types" color="primary">
         {{ t.type.name | titlecase }}
       </ion-chip>
     </div>
@@ -38,7 +56,7 @@
     <div class="poke-abilities">
       <h3>Habilidades</h3>
       <ul>
-        <li *ngFor="let ab of pokemon.abilities">
+        <li *ngFor="let ab of pokemon?.abilities">
           {{ ab.ability.name | titlecase }}
           <span *ngIf="ab.is_hidden" class="hidden-ability">(Oculta)</span>
         </li>
