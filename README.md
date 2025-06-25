@@ -67,7 +67,7 @@ npm install -g @ionic/cli
 Clone o repositório e instale as dependências:
 
 ```bash
-git clone https://github.com/seu-usuario/quem-e-esse-pokemon.git
+git clone https://github.com/Ld36/quem-e-esse-pokemon.git
 cd quem-e-esse-pokemon
 npm install
 ```
