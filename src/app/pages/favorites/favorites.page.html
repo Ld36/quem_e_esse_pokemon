@@ -14,9 +14,9 @@
 
   <div *ngIf="!loading && pokemons.length === 0" style="text-align:center; margin-top: 40px;">
     <h2>Nenhum Pokémon favoritado ainda!</h2>
-    <ion-button (click)="goToHome()">
+    <!-- <ion-button (click)="goToHome()">
       <ion-icon name="home-outline"></ion-icon> Voltar para Home
-    </ion-button>
+    </ion-button> -->
   </div>
 
   <ion-grid class="pokemon-list-grid" *ngIf="!loading && pokemons.length > 0">

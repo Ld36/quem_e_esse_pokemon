@@ -40,7 +40,9 @@ export class HomePage implements OnInit, OnDestroy {
       'heart-outline': heartOutline
     });
     }
-
+  
+  skeletonArray = Array(21); 
+  
   ionViewWillEnter() {
     const favs = localStorage.getItem('favorites');
     this.favorites = favs ? JSON.parse(favs) : [];
