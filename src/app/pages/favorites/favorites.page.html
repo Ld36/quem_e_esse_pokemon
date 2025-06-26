@@ -29,21 +29,21 @@
         *ngFor="let pokemon of pokemons"
         class="pokemon-list-col"
       >
-        <ion-card class="pokemon-card" (click)="goToDetail(pokemon.name)">
+        <ion-card class="pokemon-card" (click)="goToDetail(pokemon?.name)">
           <ion-button
             fill="clear"
             size="small"
             class="favorite-btn"
-            (click)="toggleFavorite(pokemon.name); $event.stopPropagation()"
+            (click)="toggleFavorite(pokemon?.name); $event.stopPropagation()"
           >
             <ion-icon
-              [name]="isFavorite(pokemon.name) ? 'heart' : 'heart-outline'"
-              [class.favorited]="isFavorite(pokemon.name)"
+              [name]="isFavorite(pokemon?.name) ? 'heart' : 'heart-outline'"
+              [class.favorited]="isFavorite(pokemon?.name)"
               style="font-size: 2em;"
             ></ion-icon>
           </ion-button>
-          <img class="pokemon-image" [src]="pokemon.sprites.front_default" [alt]="pokemon.name" />
-          <div class="pokemon-name">{{ pokemon.name | titlecase }}</div>
+          <img class="pokemon-image" [src]="pokemon?.sprites?.front_default" [alt]="pokemon?.name" />
+          <div class="pokemon-name">{{ pokemon?.name | titlecase }}</div>
         </ion-card>
       </ion-col>
     </ion-row>

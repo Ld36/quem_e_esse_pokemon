@@ -41,6 +41,11 @@ export class HomePage implements OnInit, OnDestroy {
     });
     }
 
+  ionViewWillEnter() {
+    const favs = localStorage.getItem('favorites');
+    this.favorites = favs ? JSON.parse(favs) : [];
+  }
+
   ngOnInit() {
     const favs = localStorage.getItem('favorites');
     if (favs) this.favorites = JSON.parse(favs);
